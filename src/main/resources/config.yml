@@ -1,23 +1,23 @@
 bots:
   - host: localhost
     name: MyInternalBotName
-    nick: CraftIRC
+    nick: HyRC
     debug-output:
       exceptions: false
       input: false
       output: false
 endpoints:
   - name: Chat
-    type: mc-chat
+    type: hy-chat
   - name: Join
-    type: mc-join
+    type: hy-join
   - name: Quit
-    type: mc-quit
+    type: hy-quit
   - name: IRC
     type: irc
     extra:
       bot: MyInternalBotName
-      channel: "#craftirc"
+      channel: "#HyRC"
 links:
   - source: Chat
     target: IRC
