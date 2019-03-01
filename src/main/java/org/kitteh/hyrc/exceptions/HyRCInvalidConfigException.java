@@ -23,18 +23,18 @@
  */
 package org.kitteh.hyrc.exceptions;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import java.io.IOException;
 
 /**
  * Invalid configs trigger these
  */
 public class HyRCInvalidConfigException extends Exception {
-    public HyRCInvalidConfigException(@Nonnull String message) {
+    public HyRCInvalidConfigException(@NonNull String message) {
         super(message);
     }
 
-    public HyRCInvalidConfigException(@Nonnull IOException e) {
+    public HyRCInvalidConfigException(@NonNull IOException e) {
         super("Could not load config file. See related exception", e);
     }
 }

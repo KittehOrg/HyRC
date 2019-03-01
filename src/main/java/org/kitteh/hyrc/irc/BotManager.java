@@ -28,8 +28,8 @@ import org.kitteh.hyrc.HyRC;
 import org.kitteh.irc.client.library.Client;
 import org.kitteh.irc.client.library.feature.auth.NickServ;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +49,7 @@ public final class BotManager {
      * @param plugin the HyRC instance
      * @param bots list of bot data to load
      */
-    public BotManager(@Nonnull HyRC plugin, @Nonnull List<? extends ConfigurationNode> bots) {
+    public BotManager(@NonNull HyRC plugin, @NonNull List<? extends ConfigurationNode> bots) {
         this.plugin = plugin;
         this.plugin.trackShutdownable(() -> BotManager.this.bots.values().forEach(IRCBot::shutdown));
         this.loadBots(bots);
@@ -61,12 +61,11 @@ public final class BotManager {
      * @param name bot name
      * @return named bot or null if no such bot exists
      */
-    @Nullable
-    public IRCBot getBot(@Nonnull String name) {
+    public @Nullable IRCBot getBot(@NonNull String name) {
         return this.bots.get(name);
     }
 
-    private void loadBots(@Nonnull List<? extends ConfigurationNode> list) {
+    private void loadBots(@NonNull List<? extends ConfigurationNode> list) {
         Set<String> usedBotNames = new HashSet<>();
         int nonMap = 0;
         int noName = 0;
@@ -94,7 +93,7 @@ public final class BotManager {
         }
     }
 
-    private void addBot(@Nonnull String name, @Nonnull ConfigurationNode data) {
+    private void addBot(@NonNull String name, @NonNull ConfigurationNode data) {
         Client.Builder botBuilder = Client.builder();
         botBuilder.name(name);
         botBuilder.serverHost(data.getNode("host").getString("localhost"));

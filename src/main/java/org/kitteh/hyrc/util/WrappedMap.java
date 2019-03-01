@@ -23,8 +23,8 @@
  */
 package org.kitteh.hyrc.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +43,7 @@ public class WrappedMap<Key, Value> {
      *
      * @param map map to be wrapped and untouched
      */
-    public WrappedMap(@Nonnull Map<Key, Value> map) {
+    public WrappedMap(@NonNull Map<Key, Value> map) {
         this.innerMap = map;
     }
 
@@ -101,7 +101,7 @@ public class WrappedMap<Key, Value> {
      * @param key the key
      * @return the value the key is mapped to, or null if no mapping exists
      */
-    public Value get(@Nullable Key key) {
+    public @Nullable Value get(@Nullable Key key) {
         if (this.outerMap.containsKey(key)) {
             return this.outerMap.get(key);
         }
@@ -121,7 +121,7 @@ public class WrappedMap<Key, Value> {
      * @return the value 'displaced' by the new mapping (See above) or null
      * if nothing was displaced.
      */
-    public Value put(@Nullable Key key, @Nullable Value value) {
+    public @Nullable Value put(@Nullable Key key, @Nullable Value value) {
         Value displaced;
         if (this.outerMap.containsKey(key)) {
             displaced = this.outerMap.get(key);
@@ -138,7 +138,7 @@ public class WrappedMap<Key, Value> {
      * @param key the key for which the mapping should be removed
      * @return the removed mapped value, or null if no mapping existed
      */
-    public Value remove(@Nullable Key key) {
+    public @Nullable Value remove(@Nullable Key key) {
         return this.outerMap.remove(key);
     }
 
@@ -147,7 +147,7 @@ public class WrappedMap<Key, Value> {
      *
      * @param m mappings to add to the modifiable map
      */
-    public void putAll(@Nonnull Map<? extends Key, ? extends Value> m) {
+    public void putAll(@NonNull Map<? extends Key, ? extends Value> m) {
         this.outerMap.putAll(m);
     }
 }

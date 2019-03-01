@@ -28,7 +28,7 @@ import org.kitteh.hyrc.endpoint.filter.Filter;
 import org.kitteh.hyrc.util.loadable.Load;
 import org.kitteh.hyrc.util.loadable.Loadable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Anti highlight aww yes.
@@ -41,7 +41,7 @@ public class AntiHighlight extends Filter {
     private String variable;
 
     @Override
-    public void processMessage(@Nonnull TargetedMessage message) {
+    public void processMessage(@NonNull TargetedMessage message) {
         if (message.getCustomData().containsKey(this.variable)) {
             String oldValue = message.getCustomData().get(this.variable).toString();
             if (oldValue.length() > 1) {

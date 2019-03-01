@@ -24,11 +24,11 @@
 package org.kitteh.hyrc.util.loadable;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.irc.client.library.util.Sanity;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -47,24 +47,21 @@ public abstract class LoadableTypeManager<Type extends Loadable> {
         private final Constructor<? extends Type> constructor;
         private final List<LoadableField> fields;
 
-        private LoadableLoadout(@Nonnull Class<? extends Type> clazz, @Nonnull Constructor<? extends Type> constructor, @Nonnull List<LoadableField> fields) {
+        private LoadableLoadout(@NonNull Class<? extends Type> clazz, @NonNull Constructor<? extends Type> constructor, @NonNull List<LoadableField> fields) {
             this.clazz = clazz;
             this.constructor = constructor;
             this.fields = fields;
         }
 
-        @Nonnull
-        private Class<? extends Type> getClazz() {
+        private @NonNull Class<? extends Type> getClazz() {
             return this.clazz;
         }
 
-        @Nonnull
-        private Constructor<? extends Type> getConstructor() {
+        private @NonNull Constructor<? extends Type> getConstructor() {
             return this.constructor;
         }
 
-        @Nonnull
-        private List<LoadableField> getFields() {
+        private @NonNull List<LoadableField> getFields() {
             return this.fields;
         }
     }
@@ -74,19 +71,17 @@ public abstract class LoadableTypeManager<Type extends Loadable> {
         private final String name;
         private final boolean required;
 
-        private LoadableField(@Nonnull String name, @Nonnull Field field, boolean required) {
+        private LoadableField(@NonNull String name, @NonNull Field field, boolean required) {
             this.field = field;
             this.name = name;
             this.required = required;
         }
 
-        @Nonnull
-        private Field getField() {
+        private @NonNull Field getField() {
             return this.field;
         }
 
-        @Nonnull
-        private String getName() {
+        private @NonNull String getName() {
             return this.name;
         }
 
@@ -101,12 +96,12 @@ public abstract class LoadableTypeManager<Type extends Loadable> {
     private final Map<String, List<ConfigurationNode>> unRegistered = new ConcurrentHashMap<>();
     private final Class<Type> clazz;
 
-    protected LoadableTypeManager(@Nonnull HyRC plugin, @Nonnull Class<Type> clazz) {
+    protected LoadableTypeManager(@NonNull HyRC plugin, @NonNull Class<Type> clazz) {
         this.clazz = clazz;
         this.plugin = plugin;
     }
 
-    protected void loadList(@Nonnull List<? extends ConfigurationNode> list) {
+    protected void loadList(@NonNull List<? extends ConfigurationNode> list) {
         for (final ConfigurationNode node : list) {
             if (node.getNode("type").isVirtual()) {
                 this.processInvalid("No type set", node);
@@ -123,12 +118,11 @@ public abstract class LoadableTypeManager<Type extends Loadable> {
         }
     }
 
-    @Nonnull
-    protected HyRC getHyRC() {
+    protected @NonNull HyRC getHyRC() {
         return this.plugin;
     }
 
-    private void load(@Nonnull String type, @Nonnull LoadableLoadout loadout, @Nonnull ConfigurationNode data) {
+    private void load(@NonNull String type, @NonNull LoadableLoadout loadout, @NonNull ConfigurationNode data) {
         Class<?>[] parameterTypes = loadout.getConstructor().getParameterTypes();
         Object[] args = new Object[parameterTypes.length];
         for (int i = 0; i < args.length; i++) {
@@ -182,8 +176,7 @@ public abstract class LoadableTypeManager<Type extends Loadable> {
      * @return previously registered provider for given class, else null
      * @throws IllegalArgumentException for null class or provider
      */
-    @Nonnull
-    public final <Argument> ArgumentProvider<? extends Argument> registerArgumentProvider(@Nonnull Class<Argument> clazz, @Nonnull ArgumentProvider<? extends Argument> provider) {
+    public final <Argument> @NonNull ArgumentProvider<? extends Argument> registerArgumentProvider(@NonNull Class<Argument> clazz, @NonNull ArgumentProvider<? extends Argument> provider) {
         Sanity.nullCheck(clazz, "Cannot register a null class");
         Sanity.nullCheck(provider, "Cannot register a null provider");
         @SuppressWarnings("unchecked")
@@ -213,7 +206,7 @@ public abstract class LoadableTypeManager<Type extends Loadable> {
      * manager's type, classes without the {@link Loadable.Type} annotation,
      * classes without public constructors, or for duplicate name submissions
      */
-    public final void registerType(@Nonnull Class<? extends Type> clazz) {
+    public final void registerType(@NonNull Class<? extends Type> clazz) {
         Sanity.nullCheck(clazz, "Cannot register a null class");
         Sanity.truthiness(this.clazz.isAssignableFrom(clazz), "Submitted class '" + clazz.getSimpleName() + "' is not of type " + this.clazz.getSimpleName());
 
@@ -242,7 +235,7 @@ public abstract class LoadableTypeManager<Type extends Loadable> {
         }
     }
 
-    private void mapFields(@Nonnull Map<String, LoadableField> map, @Nonnull Class<? extends Type> clazz) {
+    private void mapFields(@NonNull Map<String, LoadableField> map, @NonNull Class<? extends Type> clazz) {
         if (this.clazz.isAssignableFrom(clazz.getSuperclass())) {
             @SuppressWarnings("unchecked")
             Class<? extends Type> superClass = (Class<? extends Type>) clazz.getSuperclass();
@@ -260,9 +253,9 @@ public abstract class LoadableTypeManager<Type extends Loadable> {
         }
     }
 
-    protected abstract void processCompleted(@Nonnull Type loaded) throws HyRCInvalidConfigException;
+    protected abstract void processCompleted(@NonNull Type loaded) throws HyRCInvalidConfigException;
 
-    protected abstract void processFailedLoad(@Nonnull Exception exception, @Nonnull ConfigurationNode data);
+    protected abstract void processFailedLoad(@NonNull Exception exception, @NonNull ConfigurationNode data);
 
-    protected abstract void processInvalid(@Nonnull String reason, @Nonnull ConfigurationNode data);
+    protected abstract void processInvalid(@NonNull String reason, @NonNull ConfigurationNode data);
 }

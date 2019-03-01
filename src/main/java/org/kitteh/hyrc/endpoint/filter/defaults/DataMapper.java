@@ -30,7 +30,7 @@ import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.hyrc.util.loadable.Load;
 import org.kitteh.hyrc.util.loadable.Loadable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -47,13 +47,12 @@ public class DataMapper extends Filter {
     private String message;
     private List<String> variables;
 
-    @Nonnull
-    public String getMessageFormat() {
+    public @NonNull String getMessageFormat() {
         return this.message;
     }
 
     @Override
-    public void processMessage(@Nonnull TargetedMessage message) {
+    public void processMessage(@NonNull TargetedMessage message) {
         Object[] vars = new Object[this.variables.size()];
         for (int i = 0; i < vars.length; i++) {
             Object data = message.getCustomData().get(this.variables.get(i));
@@ -63,7 +62,7 @@ public class DataMapper extends Filter {
     }
 
     @Override
-    protected void load(@Nonnull ConfigurationNode data) throws HyRCInvalidConfigException {
+    protected void load(@NonNull ConfigurationNode data) throws HyRCInvalidConfigException {
         Matcher matcher = PERCENT_VARIABLE.matcher(this.message);
         this.variables = new LinkedList<>();
         StringBuilder builder = new StringBuilder();

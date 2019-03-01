@@ -25,7 +25,7 @@ package org.kitteh.hyrc.endpoint;
 
 import org.kitteh.hyrc.util.WrappedMap;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Wraps a message as received by a particular {@link Endpoint}.
@@ -43,7 +43,7 @@ public final class TargetedMessage {
      * @param target message destination
      * @param originatingMessage the message being sent
      */
-    public TargetedMessage(@Nonnull Endpoint target, @Nonnull Message originatingMessage) {
+    public TargetedMessage(@NonNull Endpoint target, @NonNull Message originatingMessage) {
         this.target = target;
         this.originatingMessage = originatingMessage;
         this.customData = new WrappedMap<>(originatingMessage.getData());
@@ -56,8 +56,7 @@ public final class TargetedMessage {
      *
      * @return the custom data associated with the message
      */
-    @Nonnull
-    public WrappedMap<String, Object> getCustomData() {
+    public @NonNull WrappedMap<String, Object> getCustomData() {
         return this.customData;
     }
 
@@ -67,8 +66,7 @@ public final class TargetedMessage {
      *
      * @return the message to be displayed to the Endpoint
      */
-    @Nonnull
-    public String getCustomMessage() {
+    public @NonNull String getCustomMessage() {
         return this.customMessage;
     }
 
@@ -78,8 +76,7 @@ public final class TargetedMessage {
      * @param message the new message
      * @return the previously set message
      */
-    @Nonnull
-    public String setCustomMessage(@Nonnull String message) {
+    public @NonNull String setCustomMessage(@NonNull String message) {
         String oldMessage = this.customMessage;
         this.customMessage = message;
         return oldMessage;
@@ -90,8 +87,7 @@ public final class TargetedMessage {
      *
      * @return the Endpoint at which this message is targetted
      */
-    @Nonnull
-    public Endpoint getTarget() {
+    public @NonNull Endpoint getTarget() {
         return this.target;
     }
 
@@ -100,8 +96,7 @@ public final class TargetedMessage {
      *
      * @return the originating message
      */
-    @Nonnull
-    public Message getOriginatingMessage() {
+    public @NonNull Message getOriginatingMessage() {
         return this.originatingMessage;
     }
 

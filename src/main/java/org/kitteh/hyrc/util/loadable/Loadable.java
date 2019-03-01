@@ -27,7 +27,7 @@ import ninja.leaping.configurate.ConfigurationNode;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -54,5 +54,5 @@ public abstract class Loadable {
      * @param data data to load
      * @throws HyRCInvalidConfigException if invalid
      */
-    protected abstract void load(@Nonnull HyRC plugin, @Nonnull ConfigurationNode data) throws HyRCInvalidConfigException;
+    protected abstract void load(@NonNull HyRC plugin, @NonNull ConfigurationNode data) throws HyRCInvalidConfigException;
 }

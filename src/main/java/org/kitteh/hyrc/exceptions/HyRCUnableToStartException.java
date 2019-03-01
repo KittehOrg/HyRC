@@ -23,13 +23,13 @@
  */
 package org.kitteh.hyrc.exceptions;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Thrown if HyRC fails to start.
  */
 public class HyRCUnableToStartException extends Exception {
-    public HyRCUnableToStartException(@Nonnull String message, @Nonnull Exception reason) {
+    public HyRCUnableToStartException(@NonNull String message, @NonNull Exception reason) {
         super(message, reason);
     }
 }

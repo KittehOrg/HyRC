@@ -26,16 +26,15 @@ package org.kitteh.hyrc.irc;
 import org.kitteh.irc.client.library.Client;
 import org.kitteh.irc.client.library.feature.auth.NickServ;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 class NicklessServ extends NickServ {
-    NicklessServ(@Nonnull Client client, @Nonnull String accountName, @Nonnull String password) {
+    NicklessServ(@NonNull Client client, @NonNull String accountName, @NonNull String password) {
         super(client, accountName, password);
     }
 
-    @Nonnull
     @Override
-    protected String getAuthentication() {
+    protected @NonNull String getAuthentication() {
         return "PRIVMSG " + this.getNickServNick() + " :IDENTIFY " + this.getPassword();
     }
 }

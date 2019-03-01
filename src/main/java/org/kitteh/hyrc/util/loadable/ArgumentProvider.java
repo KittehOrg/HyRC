@@ -23,7 +23,7 @@
  */
 package org.kitteh.hyrc.util.loadable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * I came here for an argument.
@@ -34,6 +34,5 @@ public interface ArgumentProvider<Argument> {
      *
      * @return an instance of the argument type
      */
-    @Nonnull
-    Argument getArgument();
+    @NonNull Argument getArgument();
 }

@@ -26,7 +26,7 @@ package org.kitteh.hyrc.endpoint.link;
 import ninja.leaping.configurate.ConfigurationNode;
 import org.kitteh.hyrc.HyRC;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +44,7 @@ public final class LinkManager {
      * @param plugin the HyRC instance
      * @param links a list of link data to load
      */
-    public LinkManager(@Nonnull HyRC plugin, @Nonnull List<? extends ConfigurationNode> links) {
+    public LinkManager(@NonNull HyRC plugin, @NonNull List<? extends ConfigurationNode> links) {
         int nonMap = 0;
         int noSource = 0;
         int noTarget = 0;
@@ -80,8 +80,7 @@ public final class LinkManager {
         }
     }
 
-    @Nonnull
-    public List<Link> getLinks(@Nonnull String source) {
+    public @NonNull List<Link> getLinks(@NonNull String source) {
         LinkedList<Link> linkList = new LinkedList<>();
         List<Link> links = this.links.get(source);
         if (links != null) {
@@ -90,7 +89,7 @@ public final class LinkManager {
         return linkList;
     }
 
-    private void addLink(@Nonnull Link link) {
+    private void addLink(@NonNull Link link) {
         List<Link> links = this.links.computeIfAbsent(link.getSource(), k -> new LinkedList<>());
         links.add(link);
     }

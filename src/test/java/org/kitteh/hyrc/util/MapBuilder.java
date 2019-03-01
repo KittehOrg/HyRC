@@ -1,5 +1,7 @@
 package org.kitteh.hyrc.util;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,11 +11,11 @@ import java.util.Map;
 public final class MapBuilder<Key, Value> {
     private final Map<Key, Value> map = new HashMap<>();
 
-    public Map<Key, Value> build() {
+    public @NonNull Map<Key, Value> build() {
         return this.map;
     }
 
-    public MapBuilder<Key, Value> put(Key key, Value value) {
+    public @NonNull MapBuilder<Key, Value> put(Key key, Value value) {
         this.map.put(key, value);
         return this;
     }

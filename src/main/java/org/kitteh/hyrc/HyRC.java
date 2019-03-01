@@ -35,7 +35,7 @@ import org.kitteh.hyrc.irc.BotManager;
 import org.kitteh.hyrc.util.Logger;
 import org.kitteh.hyrc.util.shutdownable.Shutdownable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -54,8 +54,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public final class HyRC {
     private static Logger logger;
 
-    @Nonnull
-    public static Logger log() {
+    public static @NonNull Logger log() {
         if (HyRC.logger == null) {
             throw new HyRCWillLeakTearsException();
         }
@@ -68,23 +67,19 @@ public final class HyRC {
     private LinkManager linkManager;
     private final Set<Shutdownable> shutdownables = new CopyOnWriteArraySet<>();
 
-    @Nonnull
-    public BotManager getBotManager() {
+    public @NonNull BotManager getBotManager() {
         return this.botManager;
     }
 
-    @Nonnull
-    public EndpointManager getEndpointManager() {
+    public @NonNull EndpointManager getEndpointManager() {
         return this.endpointManager;
     }
 
-    @Nonnull
-    public FilterManager getFilterManager() {
+    public @NonNull FilterManager getFilterManager() {
         return this.filterManager;
     }
 
-    @Nonnull
-    public LinkManager getLinkManager() {
+    public @NonNull LinkManager getLinkManager() {
         return this.linkManager;
     }
 
@@ -93,7 +88,7 @@ public final class HyRC {
      *
      * @param shutdownable feature to track
      */
-    public void trackShutdownable(@Nonnull Shutdownable shutdownable) {
+    public void trackShutdownable(@NonNull Shutdownable shutdownable) {
         this.shutdownables.add(shutdownable);
     }
 
@@ -107,7 +102,7 @@ public final class HyRC {
      * @param dataFolder the folder in which config.yml is located
      * @throws HyRCUnableToStartException if startup fails
      */
-    public HyRC(@Nonnull Logger logger, @Nonnull File dataFolder) throws HyRCUnableToStartException {
+    public HyRC(@NonNull Logger logger, @NonNull File dataFolder) throws HyRCUnableToStartException {
         try {
             HyRC.logger = logger;
 
@@ -165,7 +160,7 @@ public final class HyRC {
         HyRC.logger = null;
     }
 
-    private void saveDefaultConfig(@Nonnull File dataFolder) {
+    private void saveDefaultConfig(@NonNull File dataFolder) {
         if (!dataFolder.exists()) {
             dataFolder.mkdirs();
         }

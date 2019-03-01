@@ -24,13 +24,13 @@
 package org.kitteh.hyrc.endpoint.filter.defaults;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.endpoint.TargetedMessage;
 import org.kitteh.hyrc.endpoint.filter.Filter;
 import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.hyrc.util.loadable.Load;
 import org.kitteh.hyrc.util.loadable.Loadable;
 
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class RegexFilter extends Filter {
             names = builder.toString();
         }
 
-        private static Action getByName(String name) {
+        private static Action getByName(@NonNull String name) {
             if (name == null) {
                 return null;
             }
@@ -84,7 +84,7 @@ public class RegexFilter extends Filter {
             }
         }
 
-        private static Match getByName(String name) {
+        private static Match getByName(@NonNull String name) {
             if (name == null) {
                 return null;
             }
@@ -103,7 +103,7 @@ public class RegexFilter extends Filter {
     private final List<String> namedGroups = new LinkedList<>();
 
     @Override
-    protected void load(@Nonnull ConfigurationNode data) throws HyRCInvalidConfigException {
+    protected void load(@NonNull ConfigurationNode data) throws HyRCInvalidConfigException {
         final String pattern;
         if ((pattern = data.getNode("pattern").getString()) == null) {
             throw new HyRCInvalidConfigException("Regex pattern requires a 'pattern' defined");
@@ -138,7 +138,7 @@ public class RegexFilter extends Filter {
     }
 
     @Override
-    public void processMessage(@Nonnull TargetedMessage message) {
+    public void processMessage(@NonNull TargetedMessage message) {
         String val = message.getCustomData().get(this.value).toString();
         Matcher matcher = this.pattern.matcher(val);
         boolean matches;

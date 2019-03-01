@@ -28,8 +28,8 @@ import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.endpoint.TargetedMessage;
 import org.kitteh.hyrc.endpoint.filter.Filter;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -44,12 +44,11 @@ public class Link {
         private LinkFilterLoader() {
         }
 
-        @Nonnull
-        public Link getLink() {
+        public @NonNull Link getLink() {
             return Link.this;
         }
 
-        public void addFilter(@Nonnull Filter filter) {
+        public void addFilter(@NonNull Filter filter) {
             Link.this.addFilter(filter);
         }
     }
@@ -58,7 +57,7 @@ public class Link {
     private final String target;
     private final List<Filter> filters = new CopyOnWriteArrayList<>();
 
-    public Link(@Nonnull HyRC plugin, @Nonnull String source, @Nonnull String target, @Nullable List<? extends ConfigurationNode> filters) {
+    public Link(@NonNull HyRC plugin, @NonNull String source, @NonNull String target, @Nullable List<? extends ConfigurationNode> filters) {
         this.source = source;
         this.target = target;
         if (filters != null) {
@@ -71,8 +70,7 @@ public class Link {
      *
      * @return the source endpoint name
      */
-    @Nonnull
-    public String getSource() {
+    public @NonNull String getSource() {
         return this.source;
     }
 
@@ -81,12 +79,11 @@ public class Link {
      *
      * @return the target endpoint name
      */
-    @Nonnull
-    public String getTarget() {
+    public @NonNull String getTarget() {
         return this.target;
     }
 
-    private void addFilter(@Nonnull Filter filter) {
+    private void addFilter(@NonNull Filter filter) {
         this.filters.add(filter);
     }
 
@@ -95,7 +92,7 @@ public class Link {
      *
      * @param message the message sent by the source
      */
-    public void filterMessage(@Nonnull TargetedMessage message) {
+    public void filterMessage(@NonNull TargetedMessage message) {
         for (Filter filter : this.filters) {
             try {
                 filter.processMessage(message);

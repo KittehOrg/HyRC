@@ -1,5 +1,7 @@
 package org.kitteh.hyrc.util;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.kitteh.hyrc.endpoint.TargetedMessage;
 import org.kitteh.hyrc.endpoint.link.Link;
 
@@ -30,7 +32,7 @@ public class PointyEnd extends Link {
         super(null, "", "", null);
     }
 
-    public final LinkFilterLoader getLoader() {
+    public final @NonNull LinkFilterLoader getLoader() {
         if (this.loader != null) {
             return loader;
         }
@@ -41,7 +43,7 @@ public class PointyEnd extends Link {
         }
     }
 
-    public void message(TargetedMessage message) {
+    public void message(@Nullable TargetedMessage message) {
         try {
             RECEIVE_MESSAGE.invoke(this, message);
         } catch (Exception e) {

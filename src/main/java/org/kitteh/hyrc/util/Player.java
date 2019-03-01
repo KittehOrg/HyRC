@@ -25,8 +25,8 @@ package org.kitteh.hyrc.util;
 
 import org.kitteh.irc.client.library.util.Sanity;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.UUID;
 
 /**
@@ -42,7 +42,7 @@ public final class Player {
      * @param name current name of the player
      * @param uniqueId the player's UUID
      */
-    public Player(@Nonnull String name, @Nonnull UUID uniqueId) {
+    public Player(@NonNull String name, @NonNull UUID uniqueId) {
         this.name = Sanity.nullCheck(name, "Name cannot be null");
         this.uniqueId = Sanity.nullCheck(uniqueId, "uniqueId cannot be null");
     }
@@ -52,8 +52,7 @@ public final class Player {
      *
      * @return the player's name
      */
-    @Nonnull
-    public String getName() {
+    public @NonNull String getName() {
         return this.name;
     }
 
@@ -62,8 +61,7 @@ public final class Player {
      *
      * @return the player's UUID
      */
-    @Nonnull
-    public UUID getUniqueID() {
+    public @NonNull UUID getUniqueID() {
         return this.uniqueId;
     }
 

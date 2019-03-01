@@ -31,7 +31,7 @@ import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.hyrc.util.loadable.LoadableTypeManager;
 import org.kitteh.irc.client.library.util.Pair;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +51,7 @@ public final class EndpointManager extends LoadableTypeManager<Endpoint> {
      * @param plugin the HyRC instance
      * @param endpoints a list of endpoint data to load
      */
-    public EndpointManager(@Nonnull HyRC plugin, @Nonnull List<? extends ConfigurationNode> endpoints) {
+    public EndpointManager(@NonNull HyRC plugin, @NonNull List<? extends ConfigurationNode> endpoints) {
         super(plugin, Endpoint.class);
         this.messageDistributor = new MessageDistributor(this, plugin);
         // We register ours first.
@@ -65,7 +65,7 @@ public final class EndpointManager extends LoadableTypeManager<Endpoint> {
      *
      * @param message message to be sent
      */
-    public void sendMessage(@Nonnull Message message) {
+    public void sendMessage(@NonNull Message message) {
         this.messageDistributor.addMessage(message);
     }
 
@@ -75,8 +75,8 @@ public final class EndpointManager extends LoadableTypeManager<Endpoint> {
      * @param source source Endpoint
      * @return destinations of a message send by the speciified Endpoint
      */
-    @Nonnull
-    Set<Pair<Link, Endpoint>> getDestinations(@Nonnull String source) {
+    @NonNull
+    Set<Pair<Link, Endpoint>> getDestinations(@NonNull String source) {
         Set<Pair<Link, Endpoint>> destinations = new HashSet<>();
         List<Link> links = this.getHyRC().getLinkManager().getLinks(source);
         for (Link link : links) {
@@ -89,7 +89,7 @@ public final class EndpointManager extends LoadableTypeManager<Endpoint> {
     }
 
     @Override
-    protected void processCompleted(@Nonnull Endpoint endpoint) throws HyRCInvalidConfigException {
+    protected void processCompleted(@NonNull Endpoint endpoint) throws HyRCInvalidConfigException {
         final String name = endpoint.getName();
         if (this.endpoints.containsKey(name)) {
             throw new HyRCInvalidConfigException("Duplicate Endpoint name '" + name + "'");
@@ -98,12 +98,12 @@ public final class EndpointManager extends LoadableTypeManager<Endpoint> {
     }
 
     @Override
-    protected void processFailedLoad(@Nonnull Exception exception, @Nonnull ConfigurationNode data) {
+    protected void processFailedLoad(@NonNull Exception exception, @NonNull ConfigurationNode data) {
         HyRC.log().warning("Failed to load Endpoint", exception);
     }
 
     @Override
-    protected void processInvalid(@Nonnull String reason, @Nonnull ConfigurationNode data) {
+    protected void processInvalid(@NonNull String reason, @NonNull ConfigurationNode data) {
         HyRC.log().warning("Encountered invalid Endpoint: " + reason);
     }
 }

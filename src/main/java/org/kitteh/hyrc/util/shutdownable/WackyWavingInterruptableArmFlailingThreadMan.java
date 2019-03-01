@@ -23,7 +23,7 @@
  */
 package org.kitteh.hyrc.util.shutdownable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * This Shutdownable simply calls {@link Thread#interrupt()} on a target
@@ -40,7 +40,7 @@ public final class WackyWavingInterruptableArmFlailingThreadMan implements Shutd
      *
      * @param target thread to shut down on {@link #shutdown()}
      */
-    public WackyWavingInterruptableArmFlailingThreadMan(@Nonnull Thread target) {
+    public WackyWavingInterruptableArmFlailingThreadMan(@NonNull Thread target) {
         this.target = target;
     }
 
@@ -50,7 +50,7 @@ public final class WackyWavingInterruptableArmFlailingThreadMan implements Shutd
     }
 
     @Override
-    public boolean equals(@Nonnull Object wackyWavingInterruptableArmFlailingThreadMan) {
+    public boolean equals(@NonNull Object wackyWavingInterruptableArmFlailingThreadMan) {
         return wackyWavingInterruptableArmFlailingThreadMan instanceof WackyWavingInterruptableArmFlailingThreadMan && this.target == ((WackyWavingInterruptableArmFlailingThreadMan) wackyWavingInterruptableArmFlailingThreadMan).target;
     }
 

@@ -23,6 +23,7 @@
  */
 package org.kitteh.hyrc.irc;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.endpoint.Endpoint;
 import org.kitteh.hyrc.endpoint.Message;
@@ -36,7 +37,6 @@ import org.kitteh.irc.client.library.event.channel.ChannelMessageEvent;
 import org.kitteh.irc.client.library.util.CIKeyMap;
 import org.kitteh.irc.lib.net.engio.mbassy.listener.Handler;
 
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -53,7 +53,7 @@ public final class IRCBot {
     private final Map<String, Set<IRCEndpoint>> channels;
     private final HyRC plugin;
 
-    IRCBot(@Nonnull HyRC plugin, @Nonnull String name, @Nonnull Client client) {
+    IRCBot(@NonNull HyRC plugin, @NonNull String name, @NonNull Client client) {
         this.plugin = plugin;
         this.client = client;
         this.channels = new CIKeyMap<>(client);
@@ -66,8 +66,7 @@ public final class IRCBot {
      *
      * @return bot name
      */
-    @Nonnull
-    public String getName() {
+    public @NonNull String getName() {
         return this.name;
     }
 
@@ -77,7 +76,7 @@ public final class IRCBot {
      * @param endpoint endpoint this channel is assigned to
      * @param channel channel to join
      */
-    public void addChannel(@Nonnull IRCEndpoint endpoint, @Nonnull String channel) {
+    public void addChannel(@NonNull IRCEndpoint endpoint, @NonNull String channel) {
         this.client.addChannel(channel);
         Set<IRCEndpoint> points = this.channels.computeIfAbsent(channel, k -> new CopyOnWriteArraySet<>());
         points.add(endpoint);
@@ -89,7 +88,7 @@ public final class IRCBot {
      * @param target target channel
      * @param message message to send
      */
-    public void sendMessage(@Nonnull Channel target, @Nonnull String message) {
+    public void sendMessage(@NonNull Channel target, @NonNull String message) {
         this.client.sendMessage(target.getName(), message);
     }
 
@@ -99,7 +98,7 @@ public final class IRCBot {
      * @param target target
      * @param message message to send
      */
-    public void sendMessage(@Nonnull String target, @Nonnull String message) {
+    public void sendMessage(@NonNull String target, @NonNull String message) {
         this.client.sendMessage(target, message);
     }
 
@@ -107,7 +106,7 @@ public final class IRCBot {
         this.client.shutdown("HyRC!");
     }
 
-    private void sendMessage(@Nonnull User sender, @Nonnull Channel channel, @Nonnull String message, @Nonnull IRCEndpoint.MessageType messageType) {
+    private void sendMessage(@NonNull User sender, @NonNull Channel channel, @NonNull String message, IRCEndpoint.@NonNull MessageType messageType) {
         final String channelName = channel.getName();
         if (!this.channels.containsKey(channelName)) {
             return;
@@ -137,13 +136,13 @@ public final class IRCBot {
 
     private class Listener {
         @Handler
-        public void message(@Nonnull ChannelMessageEvent event) {
+        public void message(@NonNull ChannelMessageEvent event) {
             User user = event.getActor();
             IRCBot.this.sendMessage(user, event.getChannel(), event.getMessage(), IRCEndpoint.MessageType.MESSAGE);
         }
 
         @Handler
-        public void action(@Nonnull ChannelCTCPEvent event) {
+        public void action(@NonNull ChannelCTCPEvent event) {
             if (event.getMessage().startsWith("ACTION ")) {
                 IRCBot.this.sendMessage(event.getActor(), event.getChannel(), event.getMessage().substring("ACTION ".length()), IRCEndpoint.MessageType.ME);
             }

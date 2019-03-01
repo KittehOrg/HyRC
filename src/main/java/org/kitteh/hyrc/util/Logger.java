@@ -23,19 +23,19 @@
  */
 package org.kitteh.hyrc.util;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Wrap a logger.
  */
 public interface Logger {
-    void info(@Nonnull String info);
+    void info(@NonNull String info);
 
-    void warning(@Nonnull String warning);
+    void warning(@NonNull String warning);
 
-    void warning(@Nonnull String warning, @Nonnull Throwable thrown);
+    void warning(@NonNull String warning, @NonNull Throwable thrown);
 
-    void severe(@Nonnull String severe);
+    void severe(@NonNull String severe);
 
-    void severe(@Nonnull String severe, @Nonnull Throwable thrown);
+    void severe(@NonNull String severe, @NonNull Throwable thrown);
 }

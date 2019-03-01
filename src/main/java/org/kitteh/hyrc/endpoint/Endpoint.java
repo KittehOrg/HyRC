@@ -29,7 +29,7 @@ import org.kitteh.hyrc.endpoint.link.Link;
 import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.hyrc.util.loadable.Loadable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Endpoints are the origin and destination of messages tracked by HyRC.
@@ -55,8 +55,7 @@ public abstract class Endpoint extends Loadable {
      *
      * @return the name of this endpoint
      */
-    @Nonnull
-    public final String getName() {
+    public final @NonNull String getName() {
         return this.name;
     }
 
@@ -70,12 +69,12 @@ public abstract class Endpoint extends Loadable {
      *
      * @param data the 'extra' section of the configuration
      */
-    protected void loadExtra(@Nonnull ConfigurationNode data) throws HyRCInvalidConfigException {
+    protected void loadExtra(@NonNull ConfigurationNode data) throws HyRCInvalidConfigException {
         // By default, nothing extra to load
     }
 
     @Override
-    protected final void load(@Nonnull HyRC plugin, @Nonnull ConfigurationNode data) throws HyRCInvalidConfigException {
+    protected final void load(@NonNull HyRC plugin, @NonNull ConfigurationNode data) throws HyRCInvalidConfigException {
         this.name = data.getNode("name").getString();
         final ConfigurationNode extra = data.getNode("extra");
         if (!extra.isVirtual()) {
@@ -88,7 +87,7 @@ public abstract class Endpoint extends Loadable {
      *
      * @param message message to process
      */
-    protected void preProcessReceivedMessage(@Nonnull TargetedMessage message) {
+    protected void preProcessReceivedMessage(@NonNull TargetedMessage message) {
         // By default, don't do anything
     }
 
@@ -100,7 +99,7 @@ public abstract class Endpoint extends Loadable {
      *
      * @param message the message to be displayed
      */
-    protected abstract void receiveMessage(@Nonnull TargetedMessage message);
+    protected abstract void receiveMessage(@NonNull TargetedMessage message);
 
     /**
      * Receive a message and process.
@@ -115,7 +114,7 @@ public abstract class Endpoint extends Loadable {
      * @param message the message sent by the source
      * @param link the link over which this message is sent
      */
-    final void receiveMessage(@Nonnull Message message, @Nonnull Link link) {
+    final void receiveMessage(@NonNull Message message, @NonNull Link link) {
         TargetedMessage targetedMessage = new TargetedMessage(this, message);
         try {
             this.preProcessReceivedMessage(targetedMessage);

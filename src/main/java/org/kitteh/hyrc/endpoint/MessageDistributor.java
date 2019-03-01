@@ -28,7 +28,7 @@ import org.kitteh.hyrc.endpoint.link.Link;
 import org.kitteh.hyrc.util.shutdownable.WackyWavingInterruptableArmFlailingThreadMan;
 import org.kitteh.irc.client.library.util.Pair;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -40,13 +40,13 @@ final class MessageDistributor extends Thread {
     private final EndpointManager endpointManager;
     private final ConcurrentLinkedQueue<Message> messages = new ConcurrentLinkedQueue<>();
 
-    MessageDistributor(@Nonnull EndpointManager manager, @Nonnull HyRC plugin) {
+    MessageDistributor(@NonNull EndpointManager manager, @NonNull HyRC plugin) {
         this.endpointManager = manager;
         plugin.trackShutdownable(new WackyWavingInterruptableArmFlailingThreadMan(this));
         this.start();
     }
 
-    void addMessage(@Nonnull Message message) {
+    void addMessage(@NonNull Message message) {
         this.messages.add(message);
         synchronized (this.messages) {
             this.messages.notify();

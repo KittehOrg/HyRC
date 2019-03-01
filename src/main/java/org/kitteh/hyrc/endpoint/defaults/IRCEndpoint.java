@@ -31,7 +31,7 @@ import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.hyrc.irc.IRCBot;
 import org.kitteh.hyrc.util.loadable.Loadable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * The standard {@link Endpoint} for IRC bots.
@@ -48,8 +48,7 @@ public class IRCEndpoint extends Endpoint {
             this.format = format;
         }
 
-        @Nonnull
-        public String getFormat() {
+        public @NonNull String getFormat() {
             return this.format;
         }
     }
@@ -70,12 +69,12 @@ public class IRCEndpoint extends Endpoint {
     }
 
     @Override
-    protected void receiveMessage(@Nonnull TargetedMessage message) {
+    protected void receiveMessage(@NonNull TargetedMessage message) {
         this.bot.sendMessage(this.channel, message.getCustomMessage());
     }
 
     @Override
-    protected void loadExtra(@Nonnull ConfigurationNode data) throws HyRCInvalidConfigException {
+    protected void loadExtra(@NonNull ConfigurationNode data) throws HyRCInvalidConfigException {
         final String botName = data.getNode("bot").getString();
         if (botName == null) {
             throw new HyRCInvalidConfigException("No bot defined");

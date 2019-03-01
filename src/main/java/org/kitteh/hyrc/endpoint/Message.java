@@ -23,7 +23,8 @@
  */
 package org.kitteh.hyrc.endpoint;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +46,7 @@ public final class Message {
      * @param defaultMessage this default message
      * @param data all associated data
      */
-    public Message(@Nonnull Endpoint source, @Nonnull String defaultMessage, @Nonnull Map<String, Object> data) {
+    public Message(@NonNull Endpoint source, @NonNull String defaultMessage, @NonNull Map<String, Object> data) {
         this.source = source;
         this.defaultMessage = defaultMessage;
         this.data = Collections.unmodifiableMap(new HashMap<>(data));
@@ -56,8 +57,7 @@ public final class Message {
      *
      * @return an immutable map representing the data
      */
-    @Nonnull
-    public Map<String, Object> getData() {
+    public @NonNull Map<String, Object> getData() {
         return this.data;
     }
 
@@ -66,8 +66,7 @@ public final class Message {
      *
      * @return the default message
      */
-    @Nonnull
-    public String getDefaultMessage() {
+    public @NonNull String getDefaultMessage() {
         return this.defaultMessage;
     }
 
@@ -76,8 +75,7 @@ public final class Message {
      *
      * @return the source Endpoint
      */
-    @Nonnull
-    public Endpoint getSource() {
+    public @NonNull Endpoint getSource() {
         return this.source;
     }
 }

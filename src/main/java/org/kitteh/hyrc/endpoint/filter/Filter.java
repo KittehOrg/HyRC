@@ -24,14 +24,13 @@
 package org.kitteh.hyrc.endpoint.filter;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.endpoint.TargetedMessage;
 import org.kitteh.hyrc.endpoint.link.Link;
 import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.hyrc.util.loadable.Loadable;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * This is a filter.
@@ -45,13 +44,11 @@ public abstract class Filter extends Loadable {
      *
      * @return the Link in use
      */
-    @Nonnull
-    protected Link getLink() {
+    protected @NonNull Link getLink() {
         return this.link;
     }
 
-    @Nullable
-    Link.LinkFilterLoader getLoader() {
+    @Nullable Link.LinkFilterLoader getLoader() {
         return this.loader;
     }
 
@@ -61,10 +58,10 @@ public abstract class Filter extends Loadable {
      *
      * @param message message to process
      */
-    public abstract void processMessage(@Nonnull TargetedMessage message);
+    public abstract void processMessage(@NonNull TargetedMessage message);
 
     @Override
-    protected final void load(@Nonnull HyRC plugin, @Nonnull ConfigurationNode data) throws HyRCInvalidConfigException {
+    protected final void load(@NonNull HyRC plugin, @NonNull ConfigurationNode data) throws HyRCInvalidConfigException {
         if (!data.getNode(FilterManager.Target.EndpointLoader).isVirtual()) {
             this.loader = (Link.LinkFilterLoader) data.getNode(FilterManager.Target.EndpointLoader).getValue();
             this.link = this.loader.getLink();
@@ -78,7 +75,7 @@ public abstract class Filter extends Loadable {
      * @param data information to load
      * @throws HyRCInvalidConfigException if things go poorly
      */
-    protected void load(@Nonnull ConfigurationNode data) throws HyRCInvalidConfigException {
+    protected void load(@NonNull ConfigurationNode data) throws HyRCInvalidConfigException {
 
     }
 }
