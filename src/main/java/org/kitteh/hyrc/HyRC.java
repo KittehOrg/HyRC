@@ -25,6 +25,7 @@ package org.kitteh.hyrc;
 
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.endpoint.EndpointManager;
 import org.kitteh.hyrc.endpoint.filter.FilterManager;
 import org.kitteh.hyrc.endpoint.link.LinkManager;
@@ -35,7 +36,6 @@ import org.kitteh.hyrc.irc.BotManager;
 import org.kitteh.hyrc.util.Logger;
 import org.kitteh.hyrc.util.shutdownable.Shutdownable;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

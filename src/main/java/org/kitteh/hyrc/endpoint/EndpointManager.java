@@ -24,6 +24,7 @@
 package org.kitteh.hyrc.endpoint;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.endpoint.defaults.IRCEndpoint;
 import org.kitteh.hyrc.endpoint.link.Link;
@@ -31,7 +32,6 @@ import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.hyrc.util.loadable.LoadableTypeManager;
 import org.kitteh.irc.client.library.util.Pair;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;

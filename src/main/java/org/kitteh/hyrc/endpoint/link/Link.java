@@ -24,12 +24,12 @@
 package org.kitteh.hyrc.endpoint.link;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.endpoint.TargetedMessage;
 import org.kitteh.hyrc.endpoint.filter.Filter;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 

@@ -24,12 +24,11 @@
 package org.kitteh.hyrc.endpoint;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.endpoint.link.Link;
 import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.hyrc.util.loadable.Loadable;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Endpoints are the origin and destination of messages tracked by HyRC.

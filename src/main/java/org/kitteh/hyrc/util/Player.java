@@ -23,10 +23,10 @@
  */
 package org.kitteh.hyrc.util;
 
-import org.kitteh.irc.client.library.util.Sanity;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.kitteh.irc.client.library.util.Sanity;
+
 import java.util.UUID;
 
 /**

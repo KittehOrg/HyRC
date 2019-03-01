@@ -23,12 +23,12 @@
  */
 package org.kitteh.hyrc.endpoint;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.endpoint.link.Link;
 import org.kitteh.hyrc.util.shutdownable.WackyWavingInterruptableArmFlailingThreadMan;
 import org.kitteh.irc.client.library.util.Pair;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**

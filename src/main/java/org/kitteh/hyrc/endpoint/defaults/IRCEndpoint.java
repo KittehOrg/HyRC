@@ -24,14 +24,13 @@
 package org.kitteh.hyrc.endpoint.defaults;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.endpoint.Endpoint;
 import org.kitteh.hyrc.endpoint.TargetedMessage;
 import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.hyrc.irc.IRCBot;
 import org.kitteh.hyrc.util.loadable.Loadable;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * The standard {@link Endpoint} for IRC bots.

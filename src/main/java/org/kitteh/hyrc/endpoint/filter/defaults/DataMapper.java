@@ -24,13 +24,13 @@
 package org.kitteh.hyrc.endpoint.filter.defaults;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.endpoint.TargetedMessage;
 import org.kitteh.hyrc.endpoint.filter.Filter;
 import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 import org.kitteh.hyrc.util.loadable.Load;
 import org.kitteh.hyrc.util.loadable.Loadable;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;

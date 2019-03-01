@@ -24,6 +24,7 @@
 package org.kitteh.hyrc.exceptions;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.io.IOException;
 
 /**

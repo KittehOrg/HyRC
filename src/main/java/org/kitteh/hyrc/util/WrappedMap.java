@@ -25,6 +25,7 @@ package org.kitteh.hyrc.util;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 

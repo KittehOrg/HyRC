@@ -23,12 +23,11 @@
  */
 package org.kitteh.hyrc.endpoint.filter.defaults;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.endpoint.TargetedMessage;
 import org.kitteh.hyrc.endpoint.filter.Filter;
 import org.kitteh.hyrc.util.loadable.Load;
 import org.kitteh.hyrc.util.loadable.Loadable;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Anti highlight aww yes.

@@ -23,9 +23,8 @@
  */
 package org.kitteh.hyrc.endpoint;
 
-import org.kitteh.hyrc.util.WrappedMap;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.kitteh.hyrc.util.WrappedMap;
 
 /**
  * Wraps a message as received by a particular {@link Endpoint}.

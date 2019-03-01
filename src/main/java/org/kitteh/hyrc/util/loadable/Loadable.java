@@ -24,10 +24,10 @@
 package org.kitteh.hyrc.util.loadable;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.exceptions.HyRCInvalidConfigException;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

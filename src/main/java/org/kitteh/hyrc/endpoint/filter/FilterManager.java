@@ -24,6 +24,7 @@
 package org.kitteh.hyrc.endpoint.filter;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.hyrc.endpoint.filter.defaults.AntiHighlight;
 import org.kitteh.hyrc.endpoint.filter.defaults.DataMapper;
@@ -31,7 +32,6 @@ import org.kitteh.hyrc.endpoint.filter.defaults.RegexFilter;
 import org.kitteh.hyrc.endpoint.link.Link;
 import org.kitteh.hyrc.util.loadable.LoadableTypeManager;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

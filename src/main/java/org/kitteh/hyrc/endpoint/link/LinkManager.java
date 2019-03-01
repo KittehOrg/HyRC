@@ -24,9 +24,9 @@
 package org.kitteh.hyrc.endpoint.link;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.kitteh.hyrc.HyRC;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
