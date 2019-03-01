@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.kitteh.irc</groupId>
             <artifactId>client-lib</artifactId>
-            <version>3.2.1</version>
+            <version>6.0.0</version>
             <classifier>shaded</classifier>
             <type>jar</type>
             <optional>true</optional>
@@ -66,6 +66,8 @@
             <groupId>org.checkerframework</groupId>
             <artifactId>checker-qual</artifactId>
             <version>2.5.3</version>
+            <type>jar</type>
+            <optional>true</optional>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -75,7 +77,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
     <build>
         <finalName>${project.artifactId}</finalName>

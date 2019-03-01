@@ -24,12 +24,12 @@
 package org.kitteh.hyrc.irc;
 
 import ninja.leaping.configurate.ConfigurationNode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.kitteh.hyrc.HyRC;
 import org.kitteh.irc.client.library.Client;
 import org.kitteh.irc.client.library.feature.auth.NickServ;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -96,12 +96,12 @@ public final class BotManager {
     private void addBot(@NonNull String name, @NonNull ConfigurationNode data) {
         Client.Builder botBuilder = Client.builder();
         botBuilder.name(name);
-        botBuilder.serverHost(data.getNode("host").getString("localhost"));
-        botBuilder.serverPort(data.getNode("port").getInt(6667));
-        botBuilder.secure(data.getNode("ssl").getBoolean());
+        botBuilder.server().host(data.getNode("host").getString("localhost"));
+        botBuilder.server().port(data.getNode("port").getInt(6667));
+        botBuilder.server().secure(data.getNode("ssl").getBoolean());
         ConfigurationNode password = data.getNode("password");
         if (!password.isVirtual()) {
-            botBuilder.serverPassword(password.getString());
+            botBuilder.server().password(password.getString());
         }
         botBuilder.user(data.getNode("user").getString("HyRC"));
         botBuilder.realName(data.getNode("realname").getString("HyRC Bot"));
@@ -109,32 +109,36 @@ public final class BotManager {
         ConfigurationNode bind = data.getNode("bind");
         ConfigurationNode bindHost = bind.getNode("host");
         if (!bindHost.isVirtual()) {
-            botBuilder.bindHost(bindHost.getString());
+            botBuilder.bind().host(bindHost.getString());
         }
-        botBuilder.bindPort(bind.getNode("port").getInt(0));
+        botBuilder.bind().port(bind.getNode("port").getInt(0));
         botBuilder.nick(data.getNode("nick").getString("HyRC"));
 
         ConfigurationNode auth = data.getNode("auth");
         String authUser = auth.getNode("user").getString();
         String authPass = auth.getNode("pass").getString();
-        boolean nickless = auth.getNode("nickless").getBoolean();
-        if (authUser != null && authPass != null) {
-            botBuilder.afterBuildConsumer(client -> client.getAuthManager().addProtocol(nickless ? new NicklessServ(client, authUser, authPass) : new NickServ(client, authUser, authPass)));
-        }
 
         ConfigurationNode debug = data.getNode("debug-output");
         if (debug.getNode("exceptions").getBoolean()) {
-            botBuilder.listenException(exception -> HyRC.log().warning("Exception on bot " + name, exception));
+            botBuilder.listeners().exception(exception -> HyRC.log().warning("Exception on bot " + name, exception));
         } else {
-            botBuilder.listenException(null);
+            botBuilder.listeners().exception(null);
         }
         if (debug.getNode("input").getBoolean()) {
-            botBuilder.listenInput(input -> HyRC.log().info("[IN] " + input));
+            botBuilder.listeners().input(input -> HyRC.log().info("[IN] " + input));
         }
         if (debug.getNode("output").getBoolean()) {
-            botBuilder.listenOutput(output -> HyRC.log().info("[OUT] " + output));
+            botBuilder.listeners().output(output -> HyRC.log().info("[OUT] " + output));
         }
 
-        this.bots.put(name, new IRCBot(this.plugin, name, botBuilder.build()));
+        Client client = botBuilder.build();
+
+        if (authUser != null && authPass != null) {
+            client.getAuthManager().addProtocol(NickServ.builder(client).account(authUser).password(authPass).build());
+        }
+
+        client.connect();
+
+        this.bots.put(name, new IRCBot(this.plugin, name, client));
     }
 }
