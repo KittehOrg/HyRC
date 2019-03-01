@@ -21,18 +21,12 @@ endpoints:
 links:
   - source: Chat
     target: IRC
-    filters:
-      - colorize
   - source: IRC
     target: Chat
     filters:
-      - colorize
       - type: datamapper
         message: "[IRC] <%IRC_PREFIX%%SENDER_NAME%> %MESSAGE_TEXT%"
   - source: Join
     target: IRC
   - source: Quit
     target: IRC
-repeatable-filters:
-  colorize:
-    type: color
